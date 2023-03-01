@@ -5,19 +5,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/WebPro-Project/dist/output.css">
+    <link rel="stylesheet" href="/dist/output.css">
     <title>Journii</title>
 </head>
 
 <body>
 
     <div id="app">
-        <nav class="relative px-4 py-4 flex items-center bg-teal-500">
+        <nav class="relative px-4 py-4 flex items-center bg-gray-400">
             <a class="w-52" href="">
-                <img src="/WebPro-Project/src/assets/image/logo-original.png" alt="JourniiLogo">
+                <img src="/src/assets/image/logo-original.png" alt="JourniiLogo">
             </a>
             <div class="mx-auto">
-                <a class="px-2" href="">Home</a>
+                <a class="px-2" href="index.html">Home</a>
                 <a class="px-2" href="">Memo</a>
                 <a class="px-2" href="">About</a>
                 <a class="px-2" href="">Contact</a>
@@ -27,8 +27,39 @@
             <button type="button" class="bg-slate-500">Sign up</button>
 
         </nav>
-        <div id="allInputs">
-            
+        <div id="allInputs" class="mx-auto mt-5 w-full max-w-xs">
+            <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                <div class="mb-4">
+                    <label class="" for="">Name</label>
+                    <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="username" type="text" placeholder="Username">
+                    <label class="" for="">Lastname</label>
+                    <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="last" type="text" placeholder="Lastname">
+                    <label class="" for="">E-mail</label>
+                    <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="E-mail" type="text" placeholder="E-mail">
+                    <label class="" for="">Password</label>
+                    <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="password" type="password" placeholder="password">
+                    <label class="" for="">Confirm Password</label>
+                    <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="confirm-password" type="password" placeholder="password">
+
+                </div>
+                <div class="">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    type="button">Sign up</button>
+                    <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
+                        already have account?
+                    </a>
+                </div>
+            </form>
         </div>
     </div>
 
