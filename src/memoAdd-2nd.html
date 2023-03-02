@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/dist/output.css">
+    <title>Journii</title>
+</head>
+
+<body class="font-kanit">
+
+    <div id="app">
+        <nav class="relative px-4 py-4 flex items-center bg-green">
+            <a class="w-52" href="">
+                <img src="/src/assets/image/logo-original.png" alt="JourniiLogo">
+            </a>
+            <div class="mx-auto">
+                <a class="px-2" href="index.html">Home</a>
+                <a class="px-2" href="memoSelect.html">Memo</a>
+                <a class="px-2" href="">About</a>
+                <a class="px-2" href="">Contact</a>
+
+            </div>
+            <button class="pr-3">Sign in</button>
+            <button type="button" @click="GoSignup()" class="bg-slate-500">Sign up</button>
+
+        </nav>
+
+        <div class="flex">
+            <div class="grow flex flex-col justify-start items-center">
+                    <h1 class="text-2xl font-medium mt-10">การบันทึกลงรายละเอียด</h1>
+
+                    <div class="w-4/5 h-screen p-5 pt-10">
+                        <div class="flex flex-col justify-center items-center pt-3">
+                            <div v-show="form1st.is_pic === true" class='flex w-2/4 h-[40vh] bg-gray-500 rounded-md p-4'>
+                                <h1 class="">PICTURE</h1>
+                            </div>
+    
+                            <div class="grid grid-cols-2 w-2/4">
+                                <button @click="showPic('true')" class="m-1 text-[1.1vw] mt-3 w-5/6 h-3/4 bg-green rounded-md hover:text-white">Add your image</button>
+                                <button @click="showPic('false')" class="m-1 text-[1.1vw] mt-3 w-5/6 h-3/4 bg-pink rounded-md hover:text-white">Delete your image</button>
+                            </div>
+                            
+                        </div>
+                    </div>
+            </div>
+
+            <div class="flex flex-col justify-center items-center w-1/4 pb-1/2 h-screen bg-brown gap-10">
+                <button class="list-form-btn" @click="FirstPageForm()">
+                    <div class="text-white ">บันทึกเบื้องต้น</div>
+                </button>
+    
+                <button class="list-form-btn" @click="SecondPageForm()">
+                    <div class="text-white">บันทึกลงรายละเอียด</div>
+                </button>
+    
+                <button class="list-form-btn" @click="ThirdPageForm()">
+                    <div class="text-white">สรุป</div>
+                </button>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="/src/assets/js/memoAdd.js"></script>
+
+
+</html>

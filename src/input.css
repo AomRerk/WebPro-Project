@@ -1,3 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base{
+
+}
+
+@layer components{
+    .add-jour-btn{
+        @apply bg-pink-300 absolute right-[5em] top-[1em]
+    }
+    .list-form-btn{
+        @apply text-xl w-1/2 h-[10%] bg-pink rounded-md flex justify-center items-center
+    }
+    .input-memoAdd{
+        @apply text-lg p-1 truncate border-2 border-gray-400 rounded-md
+    }
+}
+
+@layer utilities{
+    .bg-green{
+        background-color: #9DA993;
+    }
+    .bg-pink{
+        background-color: #C98F8F;
+    }
+    .bg-brown{
+        background-color: #513F3F;   
+    }
+    .font-kanit{
+        font-family: 'Kanit', sans-serif;
+    }
+}

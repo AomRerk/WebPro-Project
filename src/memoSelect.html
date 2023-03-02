@@ -12,7 +12,7 @@
 <body class="bg-zinc-300">
 
     <div id="app" >
-        <nav class="relative px-4 py-4 flex items-center bg-gray-400">
+        <nav class="relative px-4 py-4 flex items-center bg-green">
             <a class="w-52" href="">
                 <img src="/src/assets/image/logo-original.png" alt="JourniiLogo">
             </a>
@@ -31,7 +31,10 @@
 
         </nav>
         <div class="text-center pt-6">
-            <h1 class="text-4xl">Journey logs search</h1>
+            <div class="relative flex justify-center">
+                <h1 class="text-4xl">Journey logs search</h1>
+                <button class="add-jour-btn" onclick="location.replace('./memoAdd.html')">Add your journey</button>
+            </div>
             <h3 class="pt-2">find your interesting journey logs here !</h3>
         </div>
         <div class="flex justify-center">
@@ -101,7 +104,5 @@
         }
     })
 </script>
-</script>
-<!-- <script src="/WebPro-Project/assets/js/App.js"></script> -->
 
 </html>
