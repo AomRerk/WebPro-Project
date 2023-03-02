@@ -1,6 +1,16 @@
+
 var app = new Vue({
-  el: "#app",
+  el: '#app',
   data: {
+    city_select: "",
+    country_select: "",
+    date: "",
+    isClick: false,
+    isTimeClick: false,
+    numofpeople: "",
+    province_select: "",
+    range: "",
+    time: "",
   },
 
   methods: {

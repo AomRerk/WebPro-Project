@@ -9,7 +9,7 @@
     <title>Journii</title>
 </head>
 
-<body class="bg-zinc-300">
+<body class="bg-zinc-300 font-kanit">
 
     <div id="app" >
         <nav class="relative px-4 py-4 flex items-center bg-green">
@@ -42,44 +42,50 @@
                 <input class="bg-gray-100 shadow-md rounded py-1.5 px-6 mx-5" placeholder="title or keyword"></select>
                 <select v-model="country_select" class="bg-gray-100 shadow-md rounded py-1.5 px-6 mx-5 text-center">
                     <option disabled value="">---select country---</option>
-                    <option value="1">Thailand</option>
-                    <option value="2">Taiwan</option>
-                    <option value="3">USA</option>
+                    <option value="Thailand">Thailand</option>
+                    <option value="Taiwan">Taiwan</option>
+                    <option value="USA">USA</option>
                 </select>
-                <select v-model="province_select" class="bg-gray-100 shadow-md rounded py-1.5 px-6 mx-5">
+                <select v-model="province_select" class="bg-gray-100 shadow-md rounded py-1.5 px-6 mx-5 text-center">
                     <option disabled value="">---select province---</option>
-                    <option value="1">Thailand</option>
-                    <option value="2">Taiwan</option>
-                    <option value="3">USA</option>
+                    <option value="Bangkok">Bangkok</option>
+                    <option value="Taipei">Taipei</option>
+                    <option value="Washington D.C.">Washington D.C.</option>
                 </select>
-                <select v-model="city_select" class="bg-gray-100 shadow-md rounded py-1.5 px-6 mx-5">
+                <select v-model="city_select" class="bg-gray-100 shadow-md rounded py-1.5 px-6 mx-5 text-center">
                     <option disabled value="">---select city---</option>
                     <option value="1">Thailand</option>
                     <option value="2">Taiwan</option>
                     <option value="3">USA</option>
                 </select>
-                <button class="bg-gray-100 shadow-md rounded py-1.5 px-6 mx-5 flex items-center justify-end">
+                <!-- <button class="bg-gray-100 shadow-md rounded py-1.5 px-6 mx-5 flex items-center justify-end">
                     <div class="mx-auto">select</div>
                     <img class="w-3" src="/src/assets/image/down-arrow.png" alt="">
-                </button>
-                <button class="bg-gray-100 shadow-md rounded py-1.5 px-6 mx-5 flex items-center justify-end">
-                    <div class="mx-auto">select</div>
+                </button> -->
+                <button class="bg-gray-100 shadow-md rounded py-1.5 px-6 mx-5 flex items-center justify-end"
+                    @click="isClick = !isClick">
+                    <div class="mx-auto">range</div>
                     <img class="w-3" src="/src/assets/image/down-arrow.png" alt="">
+                    <!-- <div>
+                    </div> -->
                 </button>
-                <select class="bg-gray-100 shadow-md rounded py-1.5 px-6 mx-5">
-                    <option>-------------</option>
+                <!-- <div> -->
+                <input type="range" min="1" max="10000" v-model="range" v-show="isClick == true">
+                <!-- </div> -->
+                <input type="date" class="bg-gray-100 shadow-md rounded py-1.5 px-6 mx-5" v-model="date">
+                <select v-model="numofpeople" class="bg-gray-100 shadow-md rounded py-1.5 px-6 mx-5 text-center">
+                    <option disabled value="">---number of people---</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
                 </select>
-                <button class="bg-gray-100 shadow-md rounded py-1.5 px-6 mx-5 flex items-center justify-end">
-                    <div class="mx-auto">select</div>
+                <button class="bg-gray-100 shadow-md rounded py-1.5 px-6 mx-5 flex items-center justify-end" @click="isTimeClick = !isTimeClick">
+                    <div class="mx-auto">sort by</div>
                     <img class="w-3" src="/src/assets/image/down-arrow.png" alt="">
                 </button>
+                <input type="time" class="bg-gray-100 shadow-md rounded py-1.5 px-6 mx-5" v-model="time"  v-show="isTimeClick == true">
             </div>
         </div>
-        <!-- <div class="flex justify-center">
-            <div class="gap-6 grid grid-cols-4 mt-4">
-                
-            </div>
-        </div> -->
     </div>
 
 
@@ -88,21 +94,6 @@
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-<script>
-    var app = new Vue({
-        el: '#app',
-        data: {
-            country_select: '',
-            province_select: '',
-            city_select: ''
-
-        },
-        methods: {
-            GoSignup() {
-                window.location.href = "SignUp.html";
-            }
-        }
-    })
-</script>
+<script src="/src/assets/js/App.js"></script>
 
 </html>

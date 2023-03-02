@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/dist/output.css">
+    <title>Journii</title>
+</head>
+
+<body class="bg-zinc-300 font-kanit">
+
+    <div id="app">
+        <nav class="relative px-4 py-4 flex items-center bg-green">
+            <a class="w-52" href="">
+                <img src="/src/assets/image/logo-original.png" alt="JourniiLogo">
+            </a>
+            <div class="mx-auto">
+                <a class="px-2" href="index.html">Home</a>
+                <a class="px-2" href="">Memo</a>
+                <a class="px-2" href="">About</a>
+                <a class="px-2" href="">Contact</a>
+
+            </div>
+            <div class="w-52">
+
+                <button class="pr-3">Sign in</button>
+                <button type="button" @click="GoSignup()" class="bg-slate-500">Sign up</button>
+            </div>
+
+        </nav>
+        <div class="text-center pt-6">
+            <div class="relative flex justify-center">
+                <h1 class="text-4xl">Journey logs search</h1>
+                <button class="add-jour-btn" onclick="location.replace('./memoAdd.html')">Add your journey</button>
+            </div>
+            <h3 class="pt-2">find your interesting journey logs here !</h3>
+        </div>
+        <div class="flex justify-center">
+            <div class="gap-8 grid grid-cols-5 mt-4 px-8" >
+                <div class="card bg-white" v-for="value in getData">
+                    <img :src="value.image" alt="pic" style="width:100%">
+                    <div class="container">
+                        <h4><b>{{value.country}}</b></h4>
+                        <p>{{value.province}}</p>
+                        <h4><b>Price: {{value.price}}</b></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<!-- <script src="/src/assets/js/App.js"></script> -->
+<script src="/src/assets/js/memoList.js"></script>
+
+
+</html>
