@@ -37,11 +37,17 @@
             </div>
             <h3 class="pt-2">find your interesting journey logs here !</h3>
         </div>
+        <div class="gap-6 grid grid-cols-4 mt-4">
+            <select v-model="country_select" class="bg-gray-100 shadow-md rounded py-1.5 px-6 mx-5 text-center">
+                <option value="">All</option>
+                <option :value="value.country" v-for="value in getData">{{value.country}}</option>
+            </select>
+        </div>
         <div class="flex justify-center">
-            <div class="gap-8 grid grid-cols-5 mt-4 px-8" >
-                <div class="card bg-white" v-for="value in getData">
+            <div class="gap-8 grid grid-cols-5 mt-4 px-8">
+                <div class="card bg-white" v-for="value in countryFilter">
                     <img :src="value.image" alt="pic" style="width:100%">
-                    <div class="container">
+                    <div class="card-data">
                         <h4><b>{{value.country}}</b></h4>
                         <p>{{value.province}}</p>
                         <h4><b>Price: {{value.price}}</b></h4>

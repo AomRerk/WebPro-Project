@@ -2,7 +2,7 @@ var app = new Vue({
     el: '#app',
     data: {
         //   city_select: "",
-        //   country_select: "",
+          country_select: "",
         //   date: "",
         //   isClick: false,
         //   isTimeClick: false,
@@ -11,6 +11,7 @@ var app = new Vue({
         //   range: "",
         //   time: "",
         getData: [],
+
     },
 
     methods: {
@@ -39,4 +40,9 @@ var app = new Vue({
             this.getData = value;
         });
     },
+    computed: {
+        countryFilter() {
+            return  this.getData.filter(f => f.country == this.country_select || this.country_select == '')
+        }
+    }
 });
