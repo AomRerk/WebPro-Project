@@ -12,6 +12,7 @@
 <body class="bg-zinc-300 font-kanit">
 
     <div id="app">
+        <!---------------------- navbar---------------------------------- -->
         <nav class="relative px-4 py-4 flex items-center bg-green">
             <a class="w-52" href="">
                 <img src="/src/assets/image/logo-original.png" alt="JourniiLogo">
@@ -30,6 +31,7 @@
             </div>
 
         </nav>
+        <!---------------------- search ---------------------------------- -->
         <div class="text-center pt-6">
             <div class="relative flex justify-center">
                 <h1 class="text-4xl">Journey logs search</h1>
@@ -37,12 +39,14 @@
             </div>
             <h3 class="pt-2">find your interesting journey logs here !</h3>
         </div>
+        <!---------------------- country select---------------------------------- -->
         <div class="gap-6 grid grid-cols-4 mt-4">
             <select v-model="country_select" class="bg-gray-100 shadow-md rounded py-1.5 px-6 mx-5 text-center">
                 <option value="">All</option>
                 <option :value="value.country" v-for="value in getData">{{value.country}}</option>
             </select>
         </div>
+        <!---------------------- country list---------------------------------- -->
         <div class="flex justify-center">
             <div class="gap-8 grid grid-cols-5 mt-4 px-8">
                 <div class="card bg-white" v-for="value in countryFilter">
@@ -50,6 +54,7 @@
                     <div class="card-data">
                         <h4><b>{{value.country}}</b></h4>
                         <p>{{value.province}}</p>
+                        <p>{{value.city}}</p>
                         <h4><b>Price: {{value.price}}</b></h4>
                     </div>
                 </div>
