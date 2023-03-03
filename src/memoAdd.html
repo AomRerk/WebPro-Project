@@ -35,57 +35,78 @@
                 <h1 class="text-2xl font-medium mt-10">การบันทึกเบื้องต้น</h1>
 
                 <form @submit.prevent="submit" class="w-4/5 h-screen p-5 pt-10">
-                    <input type="text" class="text-2xl truncate focus:outline-none" size="30" placeholder="Untitled">
-                    <hr>
+                    <div class="relative">
+                        <span class="absolute bottom-11 text-sm text-red-400">{{form1st.error.e_title}}</span>
+                        <input type="text" v-model="form1st.title" @input="checkTitle()" :class="{'border-2 border-red-500' : form1st.error.e_title}" class="text-2xl p-1 rounded-md truncate focus:outline-none" size="30" placeholder="Untitled">
+                        <hr>
+                    </div>
 
                     <div class="grid grid-rows-2 grid-cols-2">
                         <div class="pt-5">
-                            <p>STREET ADDRESS :</p>
+                            <p>STREET ADDRESS</p>
                             <input type="text" v-model="form1st.address.v_street" class="input-memoAdd" size="30" placeholder="street address">
                         </div>
 
                         <div class="pt-5">
-                            <p>COUNTRY :</p>
-                            <select name="country"  v-model="form1st.address.v_country" class="input-memoAdd" >
-                                <!-- <option disabled selected value="">Please select country</option> -->
-                                <option v-for="(item, index) in listCountry" :key="index" :value="item">{{item}}</option>
-                            </select>
+                            <div class="relative">
+                                <p>COUNTRY<span v-show="form1st.address.v_country == '' " class="text-md text-red-400">*</span></p>
+                                <select @change="checkCountry()" :class="{'border-2 border-red-500' : form1st.error.e_country}" name="country" v-model="form1st.address.v_country" class="input-memoAdd" >
+                                    <!-- <option disabled selected value="">Please select country</option> -->
+                                    <option v-for="(item, index) in form1st.country" :key="index" :value="item">{{item}}</option>
+                                </select>
+                                <span class="relative bottom-0 text-sm text-red-400">{{form1st.error.e_country}}</span>
+                            </div>
+                            
                         </div>
 
                         <div class="pt-5">
-                            <p>PROVINCE :</p>
+                            <p>PROVINCE</p>
                             <input type="text" v-model="form1st.address.v_province" class="input-memoAdd" size="30" placeholder="province">
                         </div>
 
                         <div class="pt-5">
-                            <p>CITY :</p>
+                            <p>CITY</p>
                             <input type="text" v-model="form1st.address.v_city" class="input-memoAdd" size="30" placeholder="city">
                         </div>
                     </div>
                     <hr class="mt-5">
 
-                    <div class="grid grid-cols-2">
-                        <div class="pt-5">
-                            <p>NUMBER OF PEOPLE :</p>
-                            <input type="number" v-model="form1st.co_traveller" class="input-memoAdd" placeholder="1">
-                        </div>
+                    <div class="grid grid-cols-2">                   
+                            <div class="pt-5">
+                                <div class="relative">
+                                    <p>NUMBER OF PEOPLE<span v-show="form1st.co_traveller == '' " class="text-md text-red-400">*</span></p>
+                                    <input type="number" @input="checkPeople()" :class="{'border-2 border-red-500' : form1st.error.e_people}" v-model="form1st.co_traveller" class="input-memoAdd" placeholder="1">
+                                    <br>
+                                    <span class="relative bottom-0 text-sm text-red-400">{{form1st.error.e_people}}</span>
+                                </div>
+                            </div>
 
                         <div class="pt-5">
-                            <p>PRICE :</p>
-                            <input type="number" v-model="form1st.price" class="input-memoAdd" size="30" placeholder="0.00">
+                            <div class="relative">
+                                <p>PRICE<span v-show="form1st.address.price == '' " class="text-md text-red-400">*</span></p>
+                                <input type="number" @input="checkPrice()" :class="{'border-2 border-red-500' : form1st.error.e_price}" v-model="form1st.price" class="input-memoAdd" size="30" placeholder="0.00">
+                                <span class="text-xl text-gray-400">$</span><br>
+                                <span class="relative bottom-0 text-sm text-red-400">{{form1st.error.e_price}}</span>
+                            </div>
                         </div>
                     </div>
                     <hr class="mt-5">
 
                     <div class="grid grid-cols-2">
                         <div class="pt-5">
-                            <p>START TIME : {{form1st.time.v_start}}</p>
-                            <input type="date" v-model="form1st.time.v_start" class="input-memoAdd" size="30">
+                            <div class="relative">
+                                <p>START TIME :</p>
+                                <input type="date" @change="checkTimeStart()" :class="{'border-2 border-red-500' : form1st.error.e_start}" v-model="form1st.time.v_start" class="input-memoAdd" size="30">
+                                <span class="relative bottom-0 text-sm text-red-400">{{form1st.error.e_start}}</span>
+                            </div>
                         </div>
 
                         <div class="pt-5">
-                            <p>END TIME : {{form1st.time.v_end}}</p>
-                            <input type="date" v-model="form1st.time.v_end" class="input-memoAdd" size="30">
+                            <div class="relative">
+                                <p>END TIME :</p>
+                                <input type="date" @change="checkTimeEnd()" :class="{'border-2 border-red-500' : form1st.error.e_end}" v-model="form1st.time.v_end" class="input-memoAdd" size="30">
+                                <span class="relative bottom-0 text-sm text-red-400">{{form1st.error.e_end}}</span>
+                            </div>
                         </div>
                     </div>
                     <hr class="mt-5">
@@ -99,7 +120,7 @@
                     <hr class="mt-5">
 
                     <div class="flex justify-end">
-                        <button @click="saveData()" class="m-1 text-[1.3vw] mt-5 w-1/6 h-8 bg-green rounded-md hover:text-white">Next</button>
+                        <button class="m-1 text-[1.3vw] mt-5 w-1/6 h-8 bg-green rounded-md hover:text-white">Next</button>
                     </div>
 
                 </form>
@@ -118,7 +139,7 @@
                     <button class="list-form-btn" @click="ThirdPageForm()">
                         <div class="text-white">สรุป</div>
                     </button>
-            </div>       
+            </div>
 
         </div>
 
