@@ -9,7 +9,7 @@
     <title>Journii</title>
 </head>
 
-<body class="font-kanit ">
+<body class="font-kanit overflow-y">
 
     <div id="app">
         <nav class="relative px-4 py-4 flex items-center bg-green">
@@ -18,7 +18,7 @@
             </a>
             <div class="mx-auto">
                 <a class="px-2" href="index.html">Home</a>
-                <a class="px-2" href="memoSelect.html">Memo</a>
+                <a class="px-2" href="memoList.html">Memo</a>
                 <a class="px-2" href="">About</a>
                 <a class="px-2" href="">Contact</a>
 
@@ -28,7 +28,7 @@
 
         </nav>
 
-        <div class="flex">
+        <div class="flex ">
 
             <!-- Form-1 -->
             <div class="grow flex flex-col justify-start items-center">
@@ -37,22 +37,27 @@
                 <form @submit.prevent="submit" class="w-4/5 h-screen p-5 pt-10">
                     <div class="relative">
                         <span class="absolute bottom-11 text-sm text-red-400">{{form1st.error.e_title}}</span>
-                        <input type="text" v-model="form1st.title" @input="checkTitle()" :class="{'border-2 border-red-500' : form1st.error.e_title}" class="text-2xl p-1 rounded-md truncate focus:outline-none" size="30" placeholder="Untitled">
+
+                        <input v-if="checkEditForm.title == false || showForm1st.length == 0" type="text" v-model="form1st.title" @input="checkTitle()" 
+                        :class="{'border-2 border-red-500' : form1st.error.e_title}" class="text-2xl p-1 rounded-md truncate focus:outline-none" placeholder="Untitled" size="30" >
+                        <input v-else-if="checkEditForm.title == true"  @focus="onFocus($event, 'title')" type="text" :value="showForm1st[0].title" class="text-2xl p-1 rounded-md truncate focus:outline-none" size="30" >
                         <hr>
                     </div>
 
                     <div class="grid grid-rows-2 grid-cols-2">
                         <div class="pt-5">
                             <p>STREET ADDRESS</p>
-                            <input type="text" v-model="form1st.address.v_street" class="input-memoAdd" size="30" placeholder="street address">
+                            <input v-if="checkEditForm.st_address == false || showForm1st.length == 0" type="text" v-model="form1st.st_address" class="input-memoAdd" size="30" placeholder="street address">
+                            <input v-else-if="checkEditForm.st_address == true"  @focus="onFocus($event, 'st_address')" type="text" :value="showForm1st[0].st_address" class="input-memoAdd" size="30" >
                         </div>
 
                         <div class="pt-5">
                             <div class="relative">
-                                <p>COUNTRY<span v-show="form1st.address.v_country == '' " class="text-md text-red-400">*</span></p>
-                                <select @change="checkCountry()" :class="{'border-2 border-red-500' : form1st.error.e_country}" name="country" v-model="form1st.address.v_country" class="input-memoAdd" >
-                                    <!-- <option disabled selected value="">Please select country</option> -->
-                                    <option v-for="(item, index) in form1st.country" :key="index" :value="item">{{item}}</option>
+                                <p>COUNTRY<span v-show="form1st.country == '' " class="text-md text-red-400">*</span></p>
+                                <select @change="checkCountry()" :class="{'border-2 border-red-500' : form1st.error.e_country}" name="country" v-model="form1st.country" class="input-memoAdd" >
+                                    <option disabled selected value="" v-if="showForm1st.length == 0">Please select country</option>
+                                    <option disabled selected value="" v-else>{{showForm1st[0].country}}</option>
+                                    <option v-for="(item, index) in form1st.country_list" :key="index" :value="item">{{item}}</option>
                                 </select>
                                 <span class="relative bottom-0 text-sm text-red-400">{{form1st.error.e_country}}</span>
                             </div>
@@ -61,12 +66,14 @@
 
                         <div class="pt-5">
                             <p>PROVINCE</p>
-                            <input type="text" v-model="form1st.address.v_province" class="input-memoAdd" size="30" placeholder="province">
+                            <input v-if="checkEditForm.province == false || showForm1st.length == 0" type="text" v-model="form1st.province" class="input-memoAdd" size="30" placeholder="province">
+                            <input v-else-if="checkEditForm.province == true"  @focus="onFocus($event, 'province')" type="text" :value="showForm1st[0].province" class="input-memoAdd" size="30" >
                         </div>
 
                         <div class="pt-5">
                             <p>CITY</p>
-                            <input type="text" v-model="form1st.address.v_city" class="input-memoAdd" size="30" placeholder="city">
+                            <input v-if="checkEditForm.city == false || showForm1st.length == 0" type="text" v-model="form1st.city" class="input-memoAdd" size="30" placeholder="city">
+                            <input v-else-if="checkEditForm.city == true"  @focus="onFocus($event, 'city')" type="text" :value="showForm1st[0].city" class="input-memoAdd" size="30" >
                         </div>
                     </div>
                     <hr class="mt-5">
@@ -75,7 +82,8 @@
                             <div class="pt-5">
                                 <div class="relative">
                                     <p>NUMBER OF PEOPLE<span v-show="form1st.co_traveller == '' " class="text-md text-red-400">*</span></p>
-                                    <input type="number" @input="checkPeople()" :class="{'border-2 border-red-500' : form1st.error.e_people}" v-model="form1st.co_traveller" class="input-memoAdd" placeholder="1">
+                                    <input v-if="checkEditForm.co_traveller == false || showForm1st.length == 0" type="number" @input="checkPeople()" :class="{'border-2 border-red-500' : form1st.error.e_people}" v-model="form1st.co_traveller" class="input-memoAdd" placeholder="1">
+                                    <input v-else-if="checkEditForm.co_traveller == true"  @focus="onFocus($event, 'co_traveller')" type="text" :value="showForm1st[0].co_traveller" class="input-memoAdd" size="30" >
                                     <br>
                                     <span class="relative bottom-0 text-sm text-red-400">{{form1st.error.e_people}}</span>
                                 </div>
@@ -83,8 +91,9 @@
 
                         <div class="pt-5">
                             <div class="relative">
-                                <p>PRICE<span v-show="form1st.address.price == '' " class="text-md text-red-400">*</span></p>
-                                <input type="number" @input="checkPrice()" :class="{'border-2 border-red-500' : form1st.error.e_price}" v-model="form1st.price" class="input-memoAdd" size="30" placeholder="0.00">
+                                <p>PRICE<span v-show="form1st.price == '' " class="text-md text-red-400">*</span></p>
+                                <input v-if="checkEditForm.price == false || showForm1st.length == 0" type="number" @input="checkPrice()" :class="{'border-2 border-red-500' : form1st.error.e_price}" v-model="form1st.price" class="input-memoAdd" size="30" placeholder="0.00">
+                                <input v-else-if="checkEditForm.price == true"  @focus="onFocus($event, 'price')" type="text" :value="showForm1st[0].price" class="input-memoAdd" size="30" >
                                 <span class="text-xl text-gray-400">$</span><br>
                                 <span class="relative bottom-0 text-sm text-red-400">{{form1st.error.e_price}}</span>
                             </div>
@@ -96,7 +105,8 @@
                         <div class="pt-5">
                             <div class="relative">
                                 <p>START TIME :</p>
-                                <input type="date" @change="checkTimeStart()" :class="{'border-2 border-red-500' : form1st.error.e_start}" v-model="form1st.time.v_start" class="input-memoAdd" size="30">
+                                <input v-if="checkEditForm.start == false || showForm1st.length == 0" type="date" @change="checkTimeStart()" :class="{'border-2 border-red-500' : form1st.error.e_start}" v-model="form1st.start" class="input-memoAdd" size="30">
+                                <input v-else-if="checkEditForm.start == true"  @focus="onFocus($event, 'start')" type="date" :value="showForm1st[0].start" class="input-memoAdd" size="30" >
                                 <span class="relative bottom-0 text-sm text-red-400">{{form1st.error.e_start}}</span>
                             </div>
                         </div>
@@ -104,7 +114,8 @@
                         <div class="pt-5">
                             <div class="relative">
                                 <p>END TIME :</p>
-                                <input type="date" @change="checkTimeEnd()" :class="{'border-2 border-red-500' : form1st.error.e_end}" v-model="form1st.time.v_end" class="input-memoAdd" size="30">
+                                <input v-if="checkEditForm.end == false || showForm1st.length == 0" type="date" @change="checkTimeEnd()" :class="{'border-2 border-red-500' : form1st.error.e_end}" v-model="form1st.end" class="input-memoAdd" size="30">
+                                <input v-else-if="checkEditForm.end == true"  @focus="onFocus($event, 'end')" type="date" :value="showForm1st[0].end" class="input-memoAdd" size="30" >
                                 <span class="relative bottom-0 text-sm text-red-400">{{form1st.error.e_end}}</span>
                             </div>
                         </div>
@@ -114,29 +125,34 @@
 
                     <div class="pt-5">
                             <p>INTRODUCTORY DESCRIPTION:</p>
-                            <textarea type="text" v-model="form1st.v_descript" class="block mt-1 p-2 text-lg border-2 border-gray-400 rounded-md" cols="60" rows="3.5" placeholder="Introductory Description">
+                            <textarea v-if="checkEditForm.descript == false || showForm1st.length == 0" type="text" v-model="form1st.descript" class="block mt-1 p-2 text-lg border-2 border-gray-400 rounded-md" cols="60" rows="3.5" placeholder="Introductory Description">
+                            </textarea>
+                            <textarea v-else-if="checkEditForm.descript == true" @focus="onFocus($event, 'descript')" type="text" :value="showForm1st[0].descript" class="block mt-1 p-2 text-lg border-2 border-gray-400 rounded-md" cols="60" rows="3.5" placeholder="Introductory Description">
                             </textarea>
                     </div>
                     <hr class="mt-5">
 
-                    <div class="flex justify-end">
-                        <button class="m-1 text-[1.3vw] mt-5 w-1/6 h-8 bg-green rounded-md hover:text-white">Next</button>
+                    <div class="flex justify-around">
+                        <button class="m-1 text-[1.3vw] mt-5 w-1/6 h-8 bg-green rounded-md hover:text-white">Save
+                        </button>
+                        <button @click="nextForm1st()" class="m-1 text-[1.3vw] mt-5 w-1/6 h-8 bg-green rounded-md hover:text-white">Next
+                        </button>
                     </div>
 
                 </form>
             </div>
 
             <!-- List Form Button  -->     
-            <div class="flex flex-col justify-center items-center w-1/4 pb-1/2 max-h-screen bg-brown gap-10">
-                    <button class="list-form-btn" @click="FirstPageForm()">
+            <div class="flex flex-col justify-center items-center w-1/4 pb-1/2  bg-brown gap-10">
+                    <button class="list-form-btn" @click="FirstPageForm('Form_2&3')">
                         <div class="text-white ">บันทึกเบื้องต้น</div>
                     </button>
         
-                    <button class="list-form-btn" @click="SecondPageForm()">
+                    <button class="list-form-btn" @click="SecondPageForm('From_1stPage')">
                         <div class="text-white">บันทึกลงรายละเอียด</div>
                     </button>
         
-                    <button class="list-form-btn" @click="ThirdPageForm()">
+                    <button class="list-form-btn" @click="ThirdPageForm('From_1stPage')">
                         <div class="text-white">สรุป</div>
                     </button>
             </div>

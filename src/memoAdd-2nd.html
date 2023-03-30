@@ -9,7 +9,7 @@
     <title>Journii</title>
 </head>
 
-<body class="font-kanit">
+<body>
 
     <div id="app">
         <nav class="relative px-4 py-4 flex items-center bg-green">
@@ -18,7 +18,7 @@
             </a>
             <div class="mx-auto">
                 <a class="px-2" href="index.html">Home</a>
-                <a class="px-2" href="memoSelect.html">Memo</a>
+                <a class="px-2" href="memoList.html">Memo</a>
                 <a class="px-2" href="">About</a>
                 <a class="px-2" href="">Contact</a>
 
@@ -29,37 +29,306 @@
         </nav>
 
         <div class="flex">
+
+            <template v-if="form2nd.isModalAdd == true">
+                <div class="modalAdd">
+                    <div class="modal-content">
+                        <span class="close" @click="form2nd.isModalAdd = false, changeOverflow()">&times;</span>
+                        <h1 class="text-2xl font-medium text-center mt-4">เพิ่มบันทึกรายละเอียด</h1>
+                        <div class="mr-15">
+                            <form @submit.prevent="submit" class="w-full h-screen p-5 pt-10">
+                                <div class="relative">
+                                    <span class="absolute bottom-11 text-sm text-red-400">{{form2nd.error.e_title}}</span>
+                                    <input type="text" v-model="form2nd.title" @input="checkTitle2ND()" :class="{'border-2 border-red-500' : form2nd.error.e_title}" class="text-2xl p-1 rounded-md truncate focus:outline-none" size="30" placeholder="Untitled">
+                                    <hr>
+                                </div>
+                            
+                                <div class="grid grid-rows-2 grid-cols-2">
+                                    <div class="pt-5">
+                                        <p>STREET ADDRESS</p>
+                                        <input type="text" v-model="form2nd.address.v_street" class="input-memoAdd" size="30" placeholder="street address">
+                                    </div>
+                                
+                                    <div class="pt-5">
+                                        <div class="relative">
+                                            <p>COUNTRY</p>
+                                            <select  name="country" v-model="form2nd.address.v_country" class="input-memoAdd" >
+                                                <!-- <option disabled selected value="">Please select country</option> -->
+                                                <option v-for="(item, index) in form1st.country_list" :key="index" :value="item">{{item}}</option>
+                                            </select>
+                                            
+                                        </div>
+    
+                                    </div>
+                                
+                                    <div class="pt-5">
+                                        <p>PROVINCE</p>
+                                        <input type="text" v-model="form2nd.address.v_province" class="input-memoAdd" size="30" placeholder="province">
+                                    </div>
+                                
+                                    <div class="pt-5">
+                                        <p>CITY</p>
+                                        <input type="text" v-model="form2nd.address.v_city" class="input-memoAdd" size="30" placeholder="city">
+                                    </div>
+                                </div>
+                                <hr class="mt-5">
+                            
+                                <div class="grid grid-cols-2">                   
+                                    <div class="pt-5">
+                                        <div class="relative">
+                                            <p>PRICE</p>
+                                            <input type="number" v-model="form2nd.price" class="input-memoAdd" size="30" placeholder="0.00">
+                                            <span class="text-xl text-gray-400">$</span><br>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <hr class="mt-5">
+                            
+                                <div class="grid grid-cols-2">
+                                    <div class="pt-5">
+                                        <div class="relative">
+                                            <p>START TIME :</p>
+                                            <input type="datetime-local" v-model="form2nd.time.v_start" class="input-memoAdd" size="30">
+                                        </div>
+                                    </div>
+                                
+                                    <div class="pt-5">
+                                        <div class="relative">
+                                            <p>END TIME :</p>
+                                            <input type="datetime-local" v-model="form2nd.time.v_end" class="input-memoAdd" size="30">
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="mt-5">
+                            
+                                 <div class="pt-5">
+                                        <div class="relative">
+                                            <p>IMAGE</p>
+                                            <input type="file" @input="" class="input-memoAdd" placeholder="1">
+                                            <br>
+                                        </div>
+                                    </div>
+                                <hr class="mt-5">
+    
+                                <div class="pt-5">
+                                        <p>DESCRIPTION:</p>
+                                        <textarea type="text" v-model="form2nd.descript" class="block mt-1 p-2 text-lg border-2 border-gray-400 rounded-md" cols="60" rows="3.5" placeholder="Description">
+                                        </textarea>
+                                </div>
+                                <hr class="mt-5">
+                            
+                                <div class="flex justify-end">
+                                    <button @click="add2ND()" class="m-1 text-[1.3vw] mt-5 mb-5 w-1/6 h-8 bg-green rounded-md hover:text-white">Add</button>
+                                </div>
+    
+                            </form>      
+
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+            <template v-if="form2nd.isModalDelete == true">
+                <div class="modalAdd">
+                    <div class="modal-content">
+                        <span class="close" @click="form2nd.isModalDelete = false, changeOverflow()">&times;</span>
+                        <h1 class="text-2xl font-medium text-center mt-4">ลบบันทึกรายละเอียด</h1>
+                        <!-- <hr class="w-1/2 "> -->
+                        <div class="w-full h-screen p-5 pt-10 mr-15">
+                            <div class="mt-5 border border-black-500 overflow-auto rounded-lg shadow">
+                                <table class="table-auto w-full">
+                                    <thead class="bg-gray-50 border-b-2 border-gray-200">
+                                        <tr>
+                                            <th>No.</th>
+                                            <th class="w-24">Title</th>
+                                            <th class="w-24 ">Address</th>
+                                            <th class="w-24 ">Description</th>
+                                            <th class="">Price</th>
+                                            <th class="w-32 ">Image</th>
+                                            <th class="w-32">Time</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-grey-100">
+                                        <template v-if="showData2nd != null">
+                                            <tr v-for="(item,index) in showData2nd">
+                                                <td class="p-3 text-sm text-gray-700 whitespace-nowrap text-center">
+                                                    <a href="#" class="font-bold text-brown hover:underline ">{{index+1}}</a>
+                                                </td>
+                                                <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                                                    {{item.title}}
+                                                </td>
+
+                                                <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                                                    <textarea class="cursor-default focus:outline-none resize-none" name="address" readonly id="" cols="26" rows="1">{{item.address}}
+                                                    </textarea>
+                                                </td>
+                                                <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                                                    <textarea class="cursor-default focus:outline-none resize-none" name="detail" readonly id="" cols="26" rows="1">{{item.descript}}
+                                                    </textarea>
+                                                </td>
+                                                <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                                                    <span v-if="item.price != '' ">{{item.price}} $</span>
+                                                    <span v-else>0 $</span>
+                                                </td>
+
+                                                <td class="p-3 text-sm text-gray-700 whitespace-nowrap overflow-x-auto inline-flex gap-3">
+                                                    <img
+                                                        src="https://media.timeout.com/images/101705309/image.jpg"
+                                                        width="100px"
+                                                        height="100px"
+                                                        alt=""
+                                                    />  
+                                                    <img
+                                                        src="https://media.timeout.com/images/101705309/image.jpg"
+                                                        width="100px"
+                                                        height="100px"
+                                                        alt=""
+                                                    />
+                                                </td>
+                                                <td class="p-3 text-sm text-gray-700">
+                                                    Start:
+                                                    <span v-if="item.start != ''">
+                                                        <input type="datetime-local" :value="item.start" disabled>
+                                                    </span>
+                                                    <span v-else>
+                                                        Not defined <br>    
+                                                    </span>
+                                                    End: 
+                                                    <span v-if="item.end != ''">
+                                                        <input type="datetime-local" :value="item.end" disabled>
+                                                    </span>
+                                                    <span v-else>
+                                                        Not defined <br>    
+                                                    </span>
+
+                                                </td>
+                                                <td class="p-3 text-sm text-gray-700 text-center">
+                                                    <input type="checkbox" @click="checkDel2ND(index)" :key="index"> 
+                                                </td>
+
+                                            </tr>
+                                        </template>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="flex justify-end">
+                                <button @click="submitDelete(true)" class="m-1 text-[1.3vw] mt-5 mb-5 w-1/6 h-8 bg-pink rounded-md hover:text-white">Delete</button>
+                                <button @click="submitDelete(false)" class="m-1 text-[1.3vw] mt-5 mb-5 w-1/6 h-8 bg-green rounded-md hover:text-white">Cancel</button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </template>     
+                        
             <div class="grow flex flex-col justify-start items-center">
                     <h1 class="text-2xl font-medium mt-10">การบันทึกลงรายละเอียด</h1>
 
-                    <div class="w-4/5 h-screen p-5 pt-10">
+                    <div class="w-11/12 h-screen p-5 pt-10">
                         <div class="flex flex-col justify-center items-center pt-3">
-                            <div v-show="form1st.is_pic === true" class='flex w-2/4 h-[40vh] bg-gray-500 rounded-md p-4'>
+                            <!-- <div v-show="form1st.is_pic === true" class='flex w-2/4 h-[40vh] bg-gray-500 rounded-md p-4'>
                                 <h1 class="">PICTURE</h1>
-                            </div>
-    
+                            </div> -->
                             <div class="grid grid-cols-2 w-2/4">
-                                <button @click="showPic('true')" class="m-1 text-[1.1vw] mt-3 w-5/6 h-3/4 bg-green rounded-md hover:text-white">Add your image</button>
-                                <button @click="showPic('false')" class="m-1 text-[1.1vw] mt-3 w-5/6 h-3/4 bg-pink rounded-md hover:text-white">Delete your image</button>
-                            </div>
-                            
+                                <button @click="form2nd.isModalAdd = true, changeOverflow()" class="m-1 text-[1.1vw] mt-3 w-5/6 h-3/4 bg-green rounded-md hover:text-white">Add more detail</button>
+                                <button @click="form2nd.isModalDelete = true, changeOverflow()" class="m-1 text-[1.1vw] mt-3 w-5/6 h-3/4 bg-pink rounded-md hover:text-white">Delete detail</button>
+                            </div>          
+                        </div>
+
+                        <div class="mt-5 border border-black-500 overflow-auto rounded-lg shadow">
+                            <table class="table-auto w-full">
+                                <thead class="bg-gray-50 border-b-2 border-gray-200">
+                                    <tr>
+                                        <th class="">No.</th>
+                                        <th class="w-24">Title</th>
+                                        <th class="w-24 ">Address</th>
+                                        <th class="w-24 ">Description</th>
+                                        <th class="">Price</th>
+                                        <th class="w-32 ">Image</th>
+                                        <th class="w-32">Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-grey-100">
+                                    <template v-if="showData2nd != null">
+                                        <tr v-for="(item,index) in showData2nd">
+                                            <td class="p-3 text-sm text-gray-700 whitespace-nowrap text-center">
+                                                <a href="#" class="font-bold text-brown hover:underline ">{{index+1}}</a>
+                                            </td>
+                                            <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                                                <textarea class="cursor-default focus:outline-none resize-none" name="title" readonly id="" cols="15" rows="2">{{item.title}}
+                                                </textarea>
+                                            </td>
+                                                
+                                            <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                                                <textarea class="cursor-default focus:outline-none resize-none" name="address" readonly id="" cols="26" rows="1">{{item.address}}
+                                                </textarea>
+                                            </td>
+                                            <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                                                <textarea class="cursor-default focus:outline-none resize-none" name="detail" readonly id="" cols="26" rows="1">{{item.descript}}
+                                                </textarea>
+                                            </td>
+                                            <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                                                <span v-if="item.price != '' ">{{item.price}} $</span>
+                                                <span v-else>0 $</span>
+                                            </td>
+                                            
+                                            <td class="p-3 text-sm text-gray-700 whitespace-nowrap overflow-x-auto inline-flex gap-3">
+                                                <img
+                                                    src="https://media.timeout.com/images/101705309/image.jpg"
+                                                    width="100px"
+                                                    height="100px"
+                                                    alt=""
+                                                />  
+                                                <img
+                                                    src="https://media.timeout.com/images/101705309/image.jpg"
+                                                    width="100px"
+                                                    height="100px"
+                                                    alt=""
+                                                />
+                                            </td>
+                                            <td class="p-3 text-sm text-gray-700">
+                                                Start:
+                                                <span v-if="item.start != ''">
+                                                    <input type="datetime-local" :value="item.start" disabled>
+                                                </span>
+                                                <span v-else>
+                                                    Not defined <br>    
+                                                </span>
+                                                End: 
+                                                <span v-if="item.end != ''">
+                                                    <input type="datetime-local" :value="item.end" disabled>
+                                                </span>
+                                                <span v-else>
+                                                    Not defined <br>    
+                                                </span>
+                                                
+                                            </td>
+                                        </tr>
+                                    </template>
+                                    
+                                </tbody>
+                            </table>
                         </div>
 
                         <div class="flex justify-around">
                             <button @click="FirstPageForm()" class="m-1 text-[1.3vw] mt-5 w-1/6 h-8 bg-green rounded-md hover:text-white">Back</button>
-                            <button @click="submit2ND()" class="m-1 text-[1.3vw] mt-5 w-1/6 h-8 bg-green rounded-md hover:text-white">Next</button>
+                            <button @click="ThirdPageForm()" class="m-1 text-[1.3vw] mt-5 w-1/6 h-8 bg-green rounded-md hover:text-white">Next</button>
                         </div>
 
                     </div>
                     
             </div>
 
-            <div class="flex flex-col justify-center items-center w-1/4 pb-1/2 h-screen bg-brown gap-10">
-                <button class="list-form-btn" @click="FirstPageForm()">
+            <!-- Right Menubar  -->
+            <div class="flex flex-col justify-center items-center w-1/4 pb-1/2  bg-brown gap-10">
+                <button class="list-form-btn" @click="FirstPageForm('From_23')">
                     <div class="text-white ">บันทึกเบื้องต้น</div>
                 </button>
     
-                <button class="list-form-btn" @click="SecondPageForm()">
+                <button class="list-form-btn" @click="">
                     <div class="text-white">บันทึกลงรายละเอียด</div>
                 </button>
     
@@ -69,6 +338,7 @@
             </div>
 
         </div>
+
 
 
     </div>
