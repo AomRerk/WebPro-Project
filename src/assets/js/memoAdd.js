@@ -368,6 +368,7 @@ var app = new Vue({
         alert("Data is added successfully!");
         localStorage.removeItem("data");
         localStorage.removeItem("data_more");
+        localStorage.removeItem("isEdit");
         location.replace("./memoList.html");
       }
     },
