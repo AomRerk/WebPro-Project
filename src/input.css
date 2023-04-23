@@ -14,6 +14,9 @@
 }
 
 @layer components{
+    .admin-allMenu-btn{
+        @apply bg-gray-200 w-3/4 h-full px-3 flex drop-shadow-lg rounded
+    }
     .add-jour-btn{
         @apply bg-pink-300 absolute right-[5em] top-[1em]
     }
@@ -22,6 +25,9 @@
     }
     .input-memoAdd{
         @apply text-lg p-1 truncate border-2 border-gray-400 rounded-md
+    }
+    .table-TH{
+        @apply p-3 text-sm font-semibold tracking-wide text-left 
     }
 }
 
@@ -34,6 +40,9 @@
     }
     .bg-brown{
         background-color: #513F3F;   
+    }
+    .bg-brown-light{
+        background-color: #BCA88E;
     }
     .text-brown{
         color: #513F3F;   
