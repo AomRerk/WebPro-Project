@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/dist/output.css">
+    <title>Journii</title>
+</head>
+
+<body>
+
+    <div id="app" class="w-screen h-screen bg-main flex justify-center">
+        <section class="back bg-cover flex justify-center items-center w-11/12 mt-10 mb-10 relative border-0 rounded-xl">
+            <nav class="absolute top-0 w-full px-4 py-4 flex items-center bg-green border-0 rounded-xl">
+                <div class="relative flex items-center w-full">
+                    <div class="flex w-1/2 justify-start">
+                        <a href="" class="w-52">
+                            <img src="/src/assets/image/logo-original.png" alt="JourniiLogo">
+                        </a>
+                    </div>
+                    <div class="shrink-0">
+                        <a class="px-2" href="index.html">Home</a>
+                        <a class="px-2" href="memoList.html">Memo</a>
+                        <a class="px-2" href="">About</a>
+                        <a class="px-2" href="">Contact</a>
+                    </div>
+                    <div class="flex w-1/2 justify-end">
+                        <button class="pr-3" @click="GoSignin()">Sign in</button>
+                        <button type="button" @click="GoSignup()" class="bg-slate-500">Sign up</button>
+                    </div>
+                </div>
+            </nav>
+            <div
+                class="form-box flex backdrop-blur justify-center items-center relative w-400 h-450 bg-transparent border-2 border-neutral-300 rounded-2xl">
+                <div class="form-value p-10 text-white">
+                    <form action="">
+                        <h2 class="text-center text-4xl">Log in</h2>
+                        <div class="inputbox relative mx-30 w-310 py-3">
+                            <ion-icon class="absolute right-0 " name="mail-outline"></ion-icon>
+                            <input class="w-full h-50 bg-transparent" type="email" 
+                                placeholder="Email" v-model='get_in.email' required>
+                        </div>
+                        <div class="inputbox relative mx-30 w-310 py-3">
+                            <ion-icon class="absolute right-0" name="lock-closed-outline"></ion-icon>
+                            <input class="w-full h-50 bg-transparent" type="password"
+                                placeholder="Password" v-model='get_in.pass' required>
+                        </div>
+                        <button type="button" class="mt-5 mb-2 rounded-2xl w-full h-8 text-black bg-white"
+                            @click="Login()">Log in</button>
+                        <div class="register">
+                            <p>Don't have an account? <a href="SignUp.html">Register</a></p>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </section>
+        <!-- </div> -->
+
+    </div>
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="/src/assets/js/SignIn.js"></script>
+</body>
+
+</html>

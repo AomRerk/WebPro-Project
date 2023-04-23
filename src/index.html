@@ -9,47 +9,59 @@
     <title>Journii</title>
 </head>
 
-<body class="bg-zinc-300 font-kanit">
+<body>
 
-    <div id="app">
-        <nav class="relative px-4 py-4 flex items-center bg-green">
-            <a class="w-52" href="">
-                <img src="/src/assets/image/logo-original.png" alt="JourniiLogo">
-            </a>
-            <div class="mx-auto">
-                <a class="px-2" href="index.html">Home</a>
-                <a class="px-2" href="memoList.html">Memo</a>
-                <a class="px-2" href="">About</a>
-                <a class="px-2" href="">Contact</a>
+    <div id="app" class="w-screen h-screen bg-main flex justify-center">
+        <section
+            class="bg-blue flex flex-col w-11/12 mt-10 mb-10 relative border-0 rounded-xl shadow-lg shadow-black-500/50 overflow-x-hidden overflow-y-auto">
+            <nav class="sticky top-0 w-full px-4 py-4 flex items-center bg-green border-0 rounded-t-xl z-50">
+                <div class="relative flex items-center w-full">
+                    <div class="flex w-1/2 justify-start">
+                        <a href="" class="w-52">
+                            <img src="/src/assets/image/logo-original.png" alt="JourniiLogo">
+                        </a>
+                    </div>
+                    <div class="shrink-0">
+                        <a class="px-2" href="index.html">Home</a>
+                        <a class="px-2" href="memoList.html">Memo</a>
+                        <a class="px-2" href="">About</a>
+                        <a class="px-2" href="">Contact</a>
+                    </div>
+                    <div class="flex w-1/2 justify-end">
+                        <button class="pr-3" @click="GoSignin()">Sign in</button>
+                        <button type="button" @click="GoSignup()" class="bg-slate-500">Sign up</button>
+                    </div>
+                </div>
+            </nav>
 
+            <div class="relative flex items-center w-full px-8 my-auto">
+                <div class="txt w-1/2 justify-start">
+                    <h1 class="text-5xl pb-20">Welcome to <br> My Journey Log</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur quasi eligendi velit
+                        numquam.
+                        Dicta odio suscipit dolores. Sunt quo fuga nostrum ullam dolorem voluptate deleniti provident
+                        consequuntur, nulla, minima incidunt!</p>
+                </div>
+                <div class="txt w-1/2 justify-end">
+                    <img class="w-11/12" src="/src/assets/image/pic.jpeg" alt="">
+                </div>
             </div>
-            <button class="pr-3">Sign in</button>
-            <button type="button" @click="GoSignup()" class="bg-slate-500">Sign up</button>
+        </section>
+        <!-- </div> -->
 
-        </nav>
-        <h1 class="text-7xl">Home</h1>
     </div>
 
 
 
 
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!-- <script src="/src/assets/js/App.js"></script> -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="/src/assets/js/memoList.js"></script>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-<script>
-    var app = new Vue({
-        el: '#app',
-        data: {
 
-
-        },
-        methods: {
-            GoSignup() {
-                window.location.href = "SignUp.html";
-            }
-        }
-    })
-</script>
-</script>
-<!-- <script src="/WebPro-Project/assets/js/App.js"></script> -->
 
 </html>

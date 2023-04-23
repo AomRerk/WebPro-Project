@@ -17,6 +17,9 @@ var app = new Vue({
     GoSignup() {
       location.replace("./SignUp.html");
     },
+    GoSignin() {
+      location.replace("./SignIp.html");
+    },
     FirstPageForm() {
       location.replace("./memoAdd.html");
     },
