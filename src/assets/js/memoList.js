@@ -3,13 +3,16 @@ var app = new Vue({
     data: {
         country_select: "",
         getData: [],
-
+        word: '',
     },
 
     methods: {
         GoSignup() {
             location.replace("./SignUp.html");
         },
+        GoSignin() {
+            location.replace("./SignIn.html");
+          },
         FirstPageForm() {
             location.replace("./memoAdd.html");
         },
@@ -22,6 +25,9 @@ var app = new Vue({
         FourthPageForm() {
             location.replace("./memoAdd-4th.html");
         },
+        Detail() {
+            alert('test')
+        }
     },
     created() {
         // ทำครั้งแรกที่appสร้าง
@@ -36,6 +42,10 @@ var app = new Vue({
         countryFilter() {
             return this.getData.filter(f => f.country == this.country_select || this.country_select == '')
             // เอาข้อมูลในgetDataมาfilter ดูว่าตัวที่filมาทีละตัวมันตรงกับตัวที่เราselectไหม ถ้าตรงมันจะreturn arrayใหม่ออกไป หรือถ้าที่เลือกเป็นสตริงเปล่าก็จะreturn arrayทั้งหมด
+        },
+        keyword() {
+            return this.getData.filter(f => 
+                f.country.toLowerCase().includes(this.word.toLowerCase()) || f.city.toLowerCase().includes(this.word.toLowerCase()) || this.word == '')
         }
     }
 });
