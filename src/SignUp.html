@@ -11,78 +11,74 @@
 
 <body>
 
-    <div id="app">
-        <nav class="relative px-4 py-4 flex items-center bg-gray-400">
-            <a class="w-52" href="">
-                <img src="/src/assets/image/logo-original.png" alt="JourniiLogo">
-            </a>
-            <div class="mx-auto">
-                <a class="px-2" href="index.html">Home</a>
-                <a class="px-2" href="memoSelect.html">Memo</a>
-                <a class="px-2" href="">About</a>
-                <a class="px-2" href="">Contact</a>
+    <div id="app" class="w-screen h-screen bg-main flex justify-center">
+        <section class="back bg-cover flex justify-center items-center w-11/12 mt-10 mb-10 relative border-0 rounded-xl">
+            <nav class="absolute top-0 w-full px-4 py-4 flex items-center bg-green border-0 rounded-xl">
+                <div class="relative flex items-center w-full">
+                    <div class="flex w-1/2 justify-start">
+                        <a href="" class="w-52">
+                            <img src="/src/assets/image/logo-original.png" alt="JourniiLogo">
+                        </a>
+                    </div>
+                    <div class="shrink-0">
+                        <a class="px-2" href="index.html">Home</a>
+                        <a class="px-2" href="memoList.html">Memo</a>
+                        <a class="px-2" href="">About</a>
+                        <a class="px-2" href="">Contact</a>
+                    </div>
+                    <div class="flex w-1/2 justify-end">
+                        <button class="pr-3" @click="GoSignin()">Sign in</button>
+                        <button type="button" @click="GoSignup()" class="bg-slate-500">Sign up</button>
+                    </div>
+                </div>
+            </nav>
+            <div
+                class="form-box flex backdrop-blur justify-center items-center relative w-400 h-450 bg-transparent border-2 border-neutral-300 rounded-2xl">
+                <div class="form-value p-10 text-white">
+                    <form action="">
+                        <h2 class="text-center text-4xl">Register</h2>
+                        <div class="inputbox relative mx-30 w-310 py-3">
+                            <!-- <ion-icon class="absolute right-0" name="mail-outline"></ion-icon> -->
+                            <input class="w-full h-50 bg-transparent " type="text" v-model="new_user.username"
+                                placeholder="Username" required>
+                        </div>
+                        <div class="inputbox relative mx-30 w-310 py-3">
+                            <ion-icon class="absolute right-0 " name="mail-outline"></ion-icon>
+                            <input class="w-full h-50 bg-transparent" type="email" v-model="new_user.email"
+                                placeholder="Email" required>
+                        </div>
+                        <div class="inputbox relative mx-30 w-310 py-3">
+                            <ion-icon class="absolute right-0" name="lock-closed-outline"></ion-icon>
+                            <input class="w-full h-50 bg-transparent" type="password" v-model="new_user.password"
+                                placeholder="Password" required>
+                        </div>
+                        <!-- <div class="forget text-center">
+                            <a href="#">Forget Password</a>
+                        </div> -->
+                        <button type="submit" class="mt-5 mb-2 rounded-2xl w-full h-8 text-black bg-white"
+                            @click="Login()">Log in</button>
+                        <div class="register">
+                            <p>Already have an account? <a href="SignIn.html">Log in</a></p>
+                        </div>
+                    </form>
+
+                </div>
 
             </div>
-            <button class="pr-3">Sign in</button>
-            <button type="button" class="bg-slate-500">Sign up</button>
+        </section>
+        <!-- </div> -->
 
-        </nav>
-        <div id="allInputs" class="mx-auto mt-5 w-full max-w-xs">
-            <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                <div class="mb-4">
-                    <label class="" for="">Name</label>
-                    <input
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="username" type="text" placeholder="Username">
-                    <label class="" for="">Lastname</label>
-                    <input
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="last" type="text" placeholder="Lastname">
-                    <label class="" for="">E-mail</label>
-                    <input
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="E-mail" type="text" placeholder="E-mail">
-                    <label class="" for="">Password</label>
-                    <input
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="password" type="password" placeholder="password">
-                    <label class="" for="">Confirm Password</label>
-                    <input
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="confirm-password" type="password" placeholder="password">
-
-                </div>
-                <div class="">
-                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                    type="button">Sign up</button>
-                    <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
-                        already have account?
-                    </a>
-                </div>
-            </form>
-        </div>
     </div>
 
 
 
 
 
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="/src/assets/js/SignUp.js"></script>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-<!-- <script src="/WebPro-Project/assets/js/App.js"></script> -->
-<script>
-    var app = new Vue({
-        el: '#app',
-        data: {
 
-
-        },
-        methods: {
-            GoSignup() {
-                window.location.href = "SignUp.html";
-            }
-        }
-    })
-</script>
 
 </html>
