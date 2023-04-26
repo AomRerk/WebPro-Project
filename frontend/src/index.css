@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@200;300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base{
+    body{
+        @apply font-kanit
+    }
+    th{
+        @apply p-3 text-sm font-semibold tracking-wide text-left
+    }
+}
+
+@layer components{
+    .admin-allMenu-btn{
+        @apply bg-gray-200 w-3/4 h-full px-3 flex drop-shadow-lg rounded
+    }
+    .add-jour-btn{
+        background-color: #E4B4B4;
+        @apply absolute right-[5em] top-[50%] -translate-y-1/2 px-2 py-1 rounded-md
+    }
+    .list-form-btn{
+        @apply text-xl w-1/2 h-[10%] bg-pink rounded-md flex justify-center items-center
+    }
+    .input-memoAdd{
+        @apply text-lg p-1 truncate border-2 border-gray-400 rounded-md
+    }
+    .table-TH{
+        @apply p-3 text-sm font-semibold tracking-wide text-left 
+    }
+    /* .btn-brown{
+        background-color: #BCA88E;
+        @apply 
+    } */
+}
+
+@layer utilities{
+    .bg-green{
+        background-color: #9DA993;
+    }
+    .bg-blue{
+        background-color: #E3E8E9;
+    }
+    .bg-pink{
+        background-color: #C98F8F;
+    }
+    .bg-brown{
+        background-color: #513F3F;   
+    }
+    .bg-brown-light{
+        background-color: #BCA88E;
+    }
+    .bg-main{
+        /* background-color: #E3E8E9;    */
+        background-image: linear-gradient(145deg, #E3E8E9, #ABC3C9);
+    }
+    .text-brown{
+        color: #513F3F;   
+    }
+    .font-kanit{
+        font-family: 'Kanit', sans-serif;
+    }
+    .modalAdd{
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+    .modal-content{
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-height: 90%;
+        overflow-y: auto;
+        border-radius: 25px;
+    }
+    .close {
+        color: #aaaaaa;
+        float: right;
+        margin-right: 3%;
+        font-size: 2.5em;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .back {
+        background-image: url('/src/assets/image/pic0.jpeg');
+    }
+
+    .inputbox {
+        border-bottom: 2px solid white;
+    }
+
+    input::placeholder {
+        color: #d4d4d8;
+    }
+
+    .box-top{
+        width: 100%;
+        @apply py-5;
+        /* height: 100px; */
+        /* border: solid 2px black; */
+        top: 0;
+    }
+
+    /* .card:hover{
+
+    } */
+}
